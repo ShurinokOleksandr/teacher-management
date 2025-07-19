@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+ 
+use App\Models\Homework;
+use App\Models\Schedule;
+use App\Models\HomeworkAnswer;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -45,4 +48,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function homeworkAnswers()
+    {
+        return $this->hasMany(HomeworkAnswer::class, 'user_id');
+    }
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class,'user_id');
+    }
+    public function homeworks()
+    {
+        return $this->hasMany(Homework::class, 'user_id');
+    }
 }
+// написать фейковіе данніе и начинать писать апи , сначала регистрацию
